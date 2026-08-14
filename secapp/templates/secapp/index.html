@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecApp - Notes</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    
+    <h2>Add Note</h2>
+        <form action="/add/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="Note content...">
+        <button type="submit">Add</button>
+    </form>
+
+    <h2>Search Notes</h2>
+    <form action="/search/" method="GET">
+        <input type="text" name="q" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Your Notes</h2>
+    <ul>
+        {% for note in notes %}
+            <li>
+                <a href="/note/{{ note.id }}/">{{ note.content }}</a>
+                <form action="/note/{{ note.id }}/delete/" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No notes yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
