@@ -74,7 +74,9 @@ def custom_login(request):
         # Here get user and check without proper hashing
         user = User.objects.filter(username=u).first()
         if user and user.check_password(p): # FLAW (part 2): no protection against brute force or db limitations
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
+            request.session.save()
             return redirect('/')
             
         # FIX: Use authenticate() api from Django and limit attempts
