@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Note Details</title>
+</head>
 <body>
+    <p><strong>Logged in user:</strong> {{ user.username }}</p>
+    <hr>
     <h1>Note Details</h1>
-    <p>{{ note.content }}</p>
+    <p><strong>Note Owner:</strong> {{ note.owner.username }}</p>
+    <p><strong>Content:</strong> {{ note.content }}</p>
+    <hr>
     <a href="/">Back</a>
 </body>
 </html>
